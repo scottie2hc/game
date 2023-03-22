@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arrow Keys Game</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="game-canvas"></canvas>
+    <script>
+      // Define canvas dimensions
+      const canvas = document.getElementById('game-canvas');
+      canvas.width = 800;
+      canvas.height = 600;
+
+      // Get canvas context
+      const ctx = canvas.getContext('2d');
+
+      // Define game state
+      let x = canvas.width / 2;
+      let y = canvas.height / 2;
+      const speed = 5;
+
+      // Handle arrow key input
+      function handleKeyDown(event) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            x -= speed;
+            break;
+          case 'ArrowRight':
+            x += speed;
+            break;
+          case 'ArrowUp':
+            y -= speed;
+            break;
+          case 'ArrowDown':
+            y += speed;
+            break;
+        }
+      }
+
+      // Attach arrow key event listener
+      document.addEventListener('keydown', handleKeyDown);
+
+      // Define game loop
+      function gameLoop() {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw rectangle
+        ctx.fillStyle = 'red';
+        ctx.fillRect(x - 25, y - 25, 50, 50);
+
+        // Request next frame
+        window.requestAnimationFrame(gameLoop);
+      }
+
+      // Start game loop
+      window.requestAnimationFrame(gameLoop);
+    </script>
+  </body>
+</html>
